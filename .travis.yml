@@ -102,7 +102,7 @@ script:
 before_install:
   - if [[ "$TRAVIS_CPU_ARCH" = "ppc64le" ]]; then
       sudo apt update;
-    - sudo apt install -y python-dev;
+      sudo apt install -y python-dev;
     fi
   - ./script/ci-install-deps
 install: ./script/ci-install-compiler
