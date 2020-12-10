@@ -99,9 +99,11 @@ script:
   - ./script/ci-build-plugin glob
   - ./script/ci-build-plugin digest
   - ./script/ci-build-plugin tests
-before_install: 
-  - apt update
-  - apt install -y python-dev 
+before_install:
+  - if [[ "$TRAVIS_CPU_ARCH" = "ppc64le" ]]; then
+      sudo apt update;
+    - sudo apt install -y python-dev;
+    fi
   - ./script/ci-install-deps
 install: ./script/ci-install-compiler
 after_success: ./script/ci-report-coverage
