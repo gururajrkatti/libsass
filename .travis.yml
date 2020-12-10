@@ -65,6 +65,7 @@ matrix:
       env: AUTOTOOLS=no COVERAGE=yes BUILD=static
     - os: linux
       compiler: g++-5
+      arch: ppc64le
       env: AUTOTOOLS=yes COVERAGE=no BUILD=shared
       addons:
         apt:
@@ -98,6 +99,9 @@ script:
   - ./script/ci-build-plugin glob
   - ./script/ci-build-plugin digest
   - ./script/ci-build-plugin tests
-before_install: ./script/ci-install-deps
+before_install: 
+  - apt update
+  - apt install -y python-dev 
+  - ./script/ci-install-deps
 install: ./script/ci-install-compiler
 after_success: ./script/ci-report-coverage
